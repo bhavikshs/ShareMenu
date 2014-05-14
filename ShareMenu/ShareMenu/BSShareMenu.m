@@ -134,21 +134,45 @@ CGPoint point;
     }
     else if ([sender state] == UIGestureRecognizerStateChanged)
     {
-        float alpha = [self getRGBAFromImage:[(UIImageView *)[vwSuper viewWithTag:53] image] atx:[sender view].center.x atY:[sender view].center.y];
-        if (alpha != 0)
+        CGRect recognizerFrame = sender.view.frame;
+        recognizerFrame.origin.x += translatedPoint.x;
+        recognizerFrame.origin.y += translatedPoint.y;
+        if (CGRectContainsRect(vwSuper.bounds, recognizerFrame))
         {
-            CGRect recognizerFrame = sender.view.frame;
-            recognizerFrame.origin.x += translatedPoint.x;
-            recognizerFrame.origin.y += translatedPoint.y;
-            
-            sender.view.frame = recognizerFrame;
-            UIButton *btn = (UIButton *)[sender view];
-            
-            if (CGRectContainsRect(vwSuper.ivShare.frame, [sender view].frame))
+            float alpha = [self getRGBAFromImage:[(UIImageView *)[vwSuper viewWithTag:53] image] atx:[sender view].center.x atY:[sender view].center.y];
+            if (alpha != 0)
             {
-                //NSLog(@"%d",[sender view].tag);
-            }else{
-                [btn setTitleColor:[UIColor whiteColor] forState:0];
+                sender.view.frame = recognizerFrame;
+            }
+            
+        }else {
+            float alpha = [self getRGBAFromImage:[(UIImageView *)[vwSuper viewWithTag:53] image] atx:[sender view].center.x atY:[sender view].center.y];
+            if (alpha != 0)
+            {
+                
+                if (recognizerFrame.origin.y < vwSuper.bounds.origin.y)
+                {
+                    recognizerFrame.origin.y = 0;
+                }
+                else if (recognizerFrame.origin.y + recognizerFrame.size.height > vwSuper.bounds.size.height) {
+                    recognizerFrame.origin.y = vwSuper.bounds.size.height - recognizerFrame.size.height;
+                }
+                if (recognizerFrame.origin.x < vwSuper.bounds.origin.x) {
+                    recognizerFrame.origin.x = 0;
+                }
+                else if (recognizerFrame.origin.x + recognizerFrame.size.width > vwSuper.bounds.size.width) {
+                    recognizerFrame.origin.x = vwSuper.bounds.size.width - recognizerFrame.size.width;
+                }
+                sender.view.frame = recognizerFrame;
+                
+                UIButton *btn = (UIButton *)[sender view];
+                
+                if (CGRectContainsRect(vwSuper.ivShare.frame, [sender view].frame))
+                {
+                    //NSLog(@"%d",[sender view].tag);
+                }else{
+                    [btn setTitleColor:[UIColor whiteColor] forState:0];
+                }
             }
         }
         [sender setTranslation:CGPointMake(0, 0) inView:vwSuper];
@@ -190,6 +214,7 @@ CGPoint point;
     
     unsigned char *rawData = (unsigned char*) calloc(height * width * 4, sizeof(unsigned char));
     
+    
     NSUInteger bytesPerPixel = 4;
     
     NSUInteger bytesPerRow = bytesPerPixel * width;
@@ -217,7 +242,6 @@ CGPoint point;
     free(rawData);
     
     return alpha;
-    
 }
 -(IBAction)btnPressed:(UIButton *)sender
 {
