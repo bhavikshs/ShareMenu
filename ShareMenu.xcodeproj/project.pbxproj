@@ -438,6 +438,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShareMenu/ShareMenu-Prefix.pch";
 				INFOPLIST_FILE = "ShareMenu/ShareMenu-Info.plist";
@@ -451,6 +452,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ShareMenu/ShareMenu-Prefix.pch";
 				INFOPLIST_FILE = "ShareMenu/ShareMenu-Info.plist";
@@ -518,6 +520,7 @@
 				7411112719233EB0009D5433 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7411112819233EB0009D5433 /* Build configuration list for PBXNativeTarget "ShareMenuTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +529,7 @@
 				7411112A19233EB0009D5433 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
